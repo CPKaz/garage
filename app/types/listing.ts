@@ -1,4 +1,5 @@
 export interface ListingAttribute {
+  id: string;
   name: string;
   value: string;
 }

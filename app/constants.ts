@@ -18,7 +18,25 @@ export const STRINGS = {
   sentMessage: "Sent! Check your inbox.",
 };
 
+export const INVOICE = {
+  title: "Invoice",
+  total: "Total",
+  website: "shopgarage.com",
+  supportEmail: "support@withgarage.com",
+  specBrand: "Brand",
+  specModelYear: "Model year",
+  specModel: "Model",
+  filename: "garage-invoice",
+  emailSubject: (listingTitle: string) => `Invoice: ${listingTitle}`,
+  emailBody: (listingTitle: string, price: string) =>
+    `Your invoice for ${listingTitle} (${price}) is attached.`,
+};
+
+export const MODEL_ATTRIBUTE_ID = "71a96c93-294f-42a5-90b8-14f13726326c";
+
 export const UUID_REGEX =
   /([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i;
+
+export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const API_BASE = "https://garage-backend.onrender.com";

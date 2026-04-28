@@ -1,6 +1,7 @@
 import { Document, Page, Text, View, Svg, Path } from "@react-pdf/renderer";
 import { styles } from "./ListingInvoice.styles";
 import type { Listing } from "../types/listing";
+import { MODEL_ATTRIBUTE_ID, INVOICE } from "../constants";
 
 function formatPrice(amount: number) {
   return new Intl.NumberFormat("en-US", {
@@ -37,27 +38,50 @@ interface Props {
 }
 
 export function ListingInvoice({ listing }: Props) {
+  const model = listing.ListingAttribute.find((a) => a.id === MODEL_ATTRIBUTE_ID);
+
+  const specs: { label: string; value: string }[] = [
+    ...(listing.itemBrand ? [{ label: INVOICE.specBrand, value: listing.itemBrand }] : []),
+    ...(listing.itemAge ? [{ label: INVOICE.specModelYear, value: String(listing.itemAge) }] : []),
+    ...(model ? [{ label: INVOICE.specModel, value: model.value }] : []),
+  ];
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Header */}
-        <View style={styles.header}>
-          <View style={styles.logoBlock}>
-            <GarageLogo />
-            <Text style={styles.logoContact}>shopgarage.com</Text>
-            <Text style={styles.logoContact}>support@withgarage.com</Text>
-          </View>
-          <View>
-            <Text style={styles.invoiceLabel}>Invoice</Text>
-            <Text style={styles.invoiceDate}>{formatDate()}</Text>
-          </View>
+        {/* Logo — top left */}
+        <View style={styles.logoBlock}>
+          <GarageLogo />
+          <Text style={styles.logoContact}>{INVOICE.website}</Text>
+          <Text style={styles.logoContact}>{INVOICE.supportEmail}</Text>
         </View>
 
+        {/* Invoice title — centered */}
+        <Text style={styles.invoiceLabel}>{INVOICE.title}</Text>
+        <Text style={styles.invoiceDate}>{formatDate()}</Text>
+
         <View style={styles.divider} />
+
+        {specs.length > 0 && (
+          <View style={styles.specsBlock}>
+            {specs.map((s) => (
+              <View key={s.label} style={styles.specRow}>
+                <Text style={styles.specLabel}>{s.label}</Text>
+                <Text style={styles.specValue}>{s.value}</Text>
+              </View>
+            ))}
+          </View>
+        )}
 
         <View style={styles.lineItem}>
           <Text style={styles.lineItemTitle}>{listing.listingTitle}</Text>
           <Text style={styles.lineItemPrice}>{formatPrice(listing.sellingPrice)}</Text>
+        </View>
+
+        <View style={styles.totalDivider} />
+        <View style={styles.totalRow}>
+          <Text style={styles.totalLabel}>{INVOICE.total}</Text>
+          <Text style={styles.totalPrice}>{formatPrice(listing.sellingPrice)}</Text>
         </View>
       </Page>
     </Document>

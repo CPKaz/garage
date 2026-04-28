@@ -5,6 +5,7 @@ import { createElement } from "react";
 import type { ReactElement } from "react";
 import { ListingInvoice } from "../../components/ListingInvoice";
 import type { Listing } from "../../types/listing";
+import { API_BASE, INVOICE } from "../../constants";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -15,9 +16,7 @@ const transporter = nodemailer.createTransport({
 });
 
 async function fetchListing(id: string): Promise<Listing> {
-  const res = await fetch(
-    `https://garage-backend.onrender.com/listings/${id}`
-  );
+  const res = await fetch(`${API_BASE}/listings/${id}`);
   if (!res.ok) throw new Error(`Listing fetch failed: ${res.status}`);
   return res.json();
 }
@@ -38,7 +37,7 @@ export async function GET(req: NextRequest) {
     return new Response(new Uint8Array(buffer), {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="garage-invoice-${id}.pdf"`,
+        "Content-Disposition": `attachment; filename="${INVOICE.filename}-${id}.pdf"`,
       },
     });
   } catch (err) {
@@ -61,9 +60,12 @@ export async function POST(req: NextRequest) {
     await transporter.sendMail({
       from: process.env.GMAIL_USER,
       to: email,
-      subject: `Invoice: ${listing.listingTitle}`,
-      text: `Your invoice for ${listing.listingTitle} (${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(listing.sellingPrice)}) is attached.`,
-      attachments: [{ filename: "garage-invoice.pdf", content: buffer }],
+      subject: INVOICE.emailSubject(listing.listingTitle),
+      text: INVOICE.emailBody(
+        listing.listingTitle,
+        new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(listing.sellingPrice)
+      ),
+      attachments: [{ filename: `${INVOICE.filename}.pdf`, content: buffer }],
     });
 
     return NextResponse.json({ ok: true });

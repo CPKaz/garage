@@ -11,15 +11,9 @@ export const styles = StyleSheet.create({
   },
 
   // Header
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: 36,
-  },
   logoBlock: {
     flexDirection: "column",
-    gap: 4,
+    marginBottom: 20,
   },
   logoContact: {
     fontSize: 9,
@@ -30,11 +24,14 @@ export const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: "Helvetica-Bold",
     color: "#111827",
+    textAlign: "center",
+    marginBottom: 4,
   },
   invoiceDate: {
     fontSize: 9,
     color: "#9ca3af",
-    marginTop: 4,
+    textAlign: "center",
+    marginBottom: 28,
   },
 
   // Divider
@@ -58,6 +55,49 @@ export const styles = StyleSheet.create({
     marginRight: 16,
   },
   lineItemPrice: {
+    fontSize: 11,
+    fontFamily: "Helvetica-Bold",
+    color: "#111827",
+  },
+
+  // Specs
+  specsBlock: {
+    marginBottom: 20,
+  },
+  specRow: {
+    flexDirection: "row",
+    paddingVertical: 3,
+  },
+  specLabel: {
+    width: "35%",
+    fontSize: 9,
+    color: "#6b7280",
+  },
+  specValue: {
+    fontSize: 9,
+    color: "#111827",
+    fontFamily: "Helvetica-Bold",
+  },
+
+  // Total
+  totalDivider: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#e5e7eb",
+    marginTop: 16,
+    marginBottom: 12,
+  },
+  totalRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 4,
+  },
+  totalLabel: {
+    fontSize: 11,
+    fontFamily: "Helvetica-Bold",
+    color: "#111827",
+  },
+  totalPrice: {
     fontSize: 11,
     fontFamily: "Helvetica-Bold",
     color: "#111827",

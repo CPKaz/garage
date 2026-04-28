@@ -4,10 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import garageLogo from "./assets/garage-logo.svg";
 import styles from "./page.module.css";
-import { STRINGS, UUID_REGEX } from "./constants";
+import { STRINGS, UUID_REGEX, EMAIL_REGEX } from "./constants";
 import type { Listing } from "./types/listing";
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function Home() {
   const [open, setOpen] = useState(false);
