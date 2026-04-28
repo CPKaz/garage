@@ -2,7 +2,7 @@ export const STRINGS = {
   logoAlt: "Garage",
   cardTitle: "Get PDF Invoice",
   cardSubtitle: "Create a PDF for any listing.",
-  modalTitle: "Get PDF Invoice",
+  modalTitle: "Instant Invoice Generator",
   inputLabel: "Listing URL",
   inputPlaceholder: "Paste a listing URL...",
   errorMessage: "Please enter a valid Garage listing URL",
