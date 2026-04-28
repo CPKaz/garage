@@ -8,6 +8,14 @@ export const STRINGS = {
   errorMessage: "Please enter a valid Garage listing URL",
   generateButton: "Generate PDF",
   loadingButton: "Loading...",
+  downloadButton: "Download PDF",
+  preparingButton: "Preparing PDF…",
+  emailLabel: "Email address",
+  emailPlaceholder: "user@example.com",
+  emailError: "Please enter a valid email address",
+  sendButton: "Send PDF",
+  sendingButton: "Sending…",
+  sentMessage: "Sent! Check your inbox.",
 };
 
 export const UUID_REGEX =
