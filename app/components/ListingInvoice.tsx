@@ -1,7 +1,7 @@
 import { Document, Page, Text, View, Svg, Path } from "@react-pdf/renderer";
 import { styles } from "./ListingInvoice.styles";
 import type { Listing } from "../types/listing";
-import { MODEL_ATTRIBUTE_ID, INVOICE } from "../constants";
+import { INVOICE } from "../constants";
 
 function formatPrice(amount: number) {
   return new Intl.NumberFormat("en-US", {
@@ -38,17 +38,10 @@ interface Props {
 }
 
 export function ListingInvoice({ listing }: Props) {
-  const model = listing.ListingAttribute.find((a) => a.id === MODEL_ATTRIBUTE_ID);
-
-  const specs: { label: string; value: string }[] = [
-    ...(listing.itemAge ? [{ label: INVOICE.specModelYear, value: String(listing.itemAge) }] : []),
-    ...(listing.itemBrand ? [{ label: INVOICE.specBrand, value: listing.itemBrand }] : []),
-    ...(model ? [{ label: INVOICE.specModel, value: model.value }] : []),
-  ];
-
   return (
     <Document>
       <Page size="A4" style={styles.page}>
+
         {/* Logo — top left */}
         <View style={styles.logoBlock}>
           <GarageLogo />
@@ -56,33 +49,60 @@ export function ListingInvoice({ listing }: Props) {
           <Text style={styles.logoContact}>{INVOICE.supportEmail}</Text>
         </View>
 
-        {/* Invoice title — centered */}
+        {/* Invoice title + number + date */}
         <Text style={styles.invoiceLabel}>{INVOICE.title}</Text>
+        <Text style={styles.invoiceNumber}>#{INVOICE.number}</Text>
         <Text style={styles.invoiceDate}>{formatDate()}</Text>
 
         <View style={styles.divider} />
 
-        {specs.length > 0 && (
-          <View style={styles.specsBlock}>
-            {specs.map((s) => (
-              <View key={s.label} style={styles.specRow}>
-                <Text style={styles.specLabel}>{s.label}</Text>
-                <Text style={styles.specValue}>{s.value}</Text>
-              </View>
-            ))}
+        {/* Bill To / Ship To */}
+        <View style={styles.addressRow}>
+          <View style={styles.addressCol}>
+            <Text style={styles.addressLabel}>{INVOICE.billToLabel}</Text>
+            <Text style={styles.addressName}>{INVOICE.billTo.name}</Text>
+            <Text style={styles.addressText}>{INVOICE.billTo.street}</Text>
+            <Text style={styles.addressText}>
+              {INVOICE.billTo.city}, {INVOICE.billTo.state} {INVOICE.billTo.zip}
+            </Text>
           </View>
-        )}
+          <View style={styles.addressCol}>
+            <Text style={styles.addressLabel}>{INVOICE.shipToLabel}</Text>
+            <Text style={styles.addressName}>{INVOICE.shipTo.name}</Text>
+            <Text style={styles.addressText}>{INVOICE.shipTo.street}</Text>
+            <Text style={styles.addressText}>
+              {INVOICE.shipTo.city}, {INVOICE.shipTo.state} {INVOICE.shipTo.zip}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.divider} />
+
+        {/* Line items */}
+        <View style={styles.lineItemsHeader}>
+          <Text style={styles.lineItemsHeaderLabel}>Description</Text>
+          <Text style={styles.lineItemsHeaderLabel}>Amount</Text>
+        </View>
 
         <View style={styles.lineItem}>
           <Text style={styles.lineItemTitle}>{listing.listingTitle}</Text>
           <Text style={styles.lineItemPrice}>{formatPrice(listing.sellingPrice)}</Text>
         </View>
+        <View style={styles.lineItem}>
+          <Text style={styles.lineItemTitle}>{INVOICE.freightLabel}</Text>
+          <Text style={styles.lineItemPrice}>{INVOICE.na}</Text>
+        </View>
+        <View style={styles.lineItem}>
+          <Text style={styles.lineItemTitle}>{INVOICE.serviceFeeLabel}</Text>
+          <Text style={styles.lineItemPrice}>{INVOICE.na}</Text>
+        </View>
 
-        <View style={styles.totalDivider} />
+        {/* Total */}
         <View style={styles.totalRow}>
           <Text style={styles.totalLabel}>{INVOICE.total}</Text>
           <Text style={styles.totalPrice}>{formatPrice(listing.sellingPrice)}</Text>
         </View>
+
       </Page>
     </Document>
   );

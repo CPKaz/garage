@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   // Header
   logoBlock: {
     flexDirection: "column",
-    marginBottom: 20,
+    marginBottom: 24,
   },
   logoContact: {
     fontSize: 9,
@@ -26,6 +26,12 @@ export const styles = StyleSheet.create({
     color: "#111827",
     textAlign: "center",
     marginBottom: 4,
+  },
+  invoiceNumber: {
+    fontSize: 10,
+    color: "#6b7280",
+    textAlign: "center",
+    marginBottom: 3,
   },
   invoiceDate: {
     fontSize: 9,
@@ -41,56 +47,77 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  // Line item
+  // Bill To / Ship To
+  addressRow: {
+    flexDirection: "row",
+    marginBottom: 28,
+    gap: 32,
+  },
+  addressCol: {
+    flex: 1,
+  },
+  addressLabel: {
+    fontSize: 8,
+    fontFamily: "Helvetica-Bold",
+    color: "#9ca3af",
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
+    marginBottom: 6,
+  },
+  addressName: {
+    fontSize: 10,
+    fontFamily: "Helvetica-Bold",
+    color: "#111827",
+    marginBottom: 3,
+  },
+  addressText: {
+    fontSize: 9,
+    color: "#374151",
+    marginBottom: 2,
+  },
+
+  // Line items
+  lineItemsHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingBottom: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: "#e5e7eb",
+    marginBottom: 4,
+  },
+  lineItemsHeaderLabel: {
+    fontSize: 8,
+    fontFamily: "Helvetica-Bold",
+    color: "#9ca3af",
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
+  },
   lineItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 4,
+    paddingVertical: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f3f4f6",
   },
   lineItemTitle: {
-    fontSize: 11,
+    fontSize: 10,
     color: "#111827",
     flex: 1,
     marginRight: 16,
   },
   lineItemPrice: {
-    fontSize: 11,
-    fontFamily: "Helvetica-Bold",
+    fontSize: 10,
     color: "#111827",
-  },
-
-  // Specs
-  specsBlock: {
-    marginBottom: 20,
-  },
-  specRow: {
-    flexDirection: "row",
-    paddingVertical: 3,
-  },
-  specLabel: {
-    width: "35%",
-    fontSize: 9,
-    color: "#6b7280",
-  },
-  specValue: {
-    fontSize: 9,
-    color: "#111827",
-    fontFamily: "Helvetica-Bold",
   },
 
   // Total
-  totalDivider: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#e5e7eb",
-    marginTop: 16,
-    marginBottom: 12,
-  },
   totalRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 4,
+    paddingTop: 10,
+    marginTop: 4,
   },
   totalLabel: {
     fontSize: 11,

@@ -24,12 +24,32 @@ export const STRINGS = {
 
 export const INVOICE = {
   title: "Invoice",
+  number: "INV-0001",
   total: "Total",
   website: "shopgarage.com",
   supportEmail: "support@withgarage.com",
   specBrand: "Brand",
   specModelYear: "Model year",
   specModel: "Model",
+  freightLabel: "Freight",
+  serviceFeeLabel: "Service Fee",
+  na: "N/A",
+  billToLabel: "Bill To",
+  billTo: {
+    name: "City of Springfield",
+    street: "1 City Hall Plaza",
+    city: "Springfield",
+    state: "IL",
+    zip: "62701",
+  },
+  shipToLabel: "Ship To",
+  shipTo: {
+    name: "Springfield Fire Department",
+    street: "325 South 7th Street",
+    city: "Springfield",
+    state: "IL",
+    zip: "62701",
+  },
   filename: "garage-invoice",
   emailSubject: (listingTitle: string) => `Invoice: ${listingTitle}`,
   emailBody: (listingTitle: string, price: string) =>
