@@ -218,20 +218,55 @@
   transform: scale(0.95);
 }
 
-.actionRow {
+.actionArea {
   display: flex;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.actionCol {
-  flex: 1;
+.actionSection {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
+.actionLabel {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0;
+}
+
+.orDivider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.orDivider::before,
+.orDivider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.emailRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.emailRow .inputWrap {
+  flex: 1;
+}
+
 .sendBtn {
-  width: 100%;
+  flex-shrink: 0;
   border-radius: 0.75rem;
   background: #f97316;
   padding: 0.75rem;

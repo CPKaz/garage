@@ -8,7 +8,10 @@ export const STRINGS = {
   errorMessage: "Please enter a valid Garage listing URL",
   generateButton: "Generate PDF",
   loadingButton: "Loading...",
+  downloadLabel: "Download",
   downloadButton: "Download PDF",
+  emailSectionLabel: "Send to my email",
+  orDivider: "or",
   preparingButton: "Preparing PDF…",
   emailLabel: "Email address",
   emailPlaceholder: "user@example.com",
@@ -16,6 +19,7 @@ export const STRINGS = {
   sendButton: "Send PDF",
   sendingButton: "Sending…",
   sentMessage: "Sent! Check your inbox.",
+  sendErrorMessage: "Failed to send. Please try again.",
 };
 
 export const INVOICE = {
