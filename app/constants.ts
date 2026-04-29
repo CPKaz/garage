@@ -18,7 +18,7 @@ export const STRINGS = {
   emailError: "Please enter a valid email address",
   sendButton: "Send PDF",
   sendingButton: "Sending…",
-  sentMessage: "Sent! It may take a few minutes to arrive.",
+  sentMessage: "Sent! It may take a few minutes to arrive. Make sure to check your spam folder.",
   sendErrorMessage: "Failed to send. Please try again.",
 };
 
