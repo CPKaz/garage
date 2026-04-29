@@ -1,19 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { renderToBuffer } from "@react-pdf/renderer";
-import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
 import { createElement } from "react";
 import type { ReactElement } from "react";
 import { ListingInvoice } from "../../components/ListingInvoice";
 import type { Listing } from "../../types/listing";
 import { API_BASE, INVOICE } from "../../constants";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-});
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 async function fetchListing(id: string): Promise<Listing> {
   const res = await fetch(`${API_BASE}/listings/${id}`);
@@ -57,15 +51,20 @@ export async function POST(req: NextRequest) {
     const listing = await fetchListing(listingId);
     const buffer = await buildPdf(listing);
 
-    await transporter.sendMail({
-      from: process.env.GMAIL_USER,
+    await sgMail.send({
       to: email,
+      from: process.env.SENDGRID_FROM!,
       subject: INVOICE.emailSubject(listing.listingTitle),
       text: INVOICE.emailBody(
         listing.listingTitle,
         new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(listing.sellingPrice)
       ),
-      attachments: [{ filename: `${INVOICE.filename}.pdf`, content: buffer }],
+      attachments: [{
+        content: buffer.toString("base64"),
+        filename: `${INVOICE.filename}.pdf`,
+        type: "application/pdf",
+        disposition: "attachment",
+      }],
     });
 
     return NextResponse.json({ ok: true });

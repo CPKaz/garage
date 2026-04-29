@@ -41,8 +41,8 @@ export function ListingInvoice({ listing }: Props) {
   const model = listing.ListingAttribute.find((a) => a.id === MODEL_ATTRIBUTE_ID);
 
   const specs: { label: string; value: string }[] = [
-    ...(listing.itemBrand ? [{ label: INVOICE.specBrand, value: listing.itemBrand }] : []),
     ...(listing.itemAge ? [{ label: INVOICE.specModelYear, value: String(listing.itemAge) }] : []),
+    ...(listing.itemBrand ? [{ label: INVOICE.specBrand, value: listing.itemBrand }] : []),
     ...(model ? [{ label: INVOICE.specModel, value: model.value }] : []),
   ];
 

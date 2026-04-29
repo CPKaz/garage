@@ -29,7 +29,7 @@ export const INVOICE = {
   filename: "garage-invoice",
   emailSubject: (listingTitle: string) => `Invoice: ${listingTitle}`,
   emailBody: (listingTitle: string, price: string) =>
-    `Your invoice for ${listingTitle} (${price}) is attached.`,
+    `Your invoice for ${listingTitle} is attached.`,
 };
 
 export const MODEL_ATTRIBUTE_ID = "71a96c93-294f-42a5-90b8-14f13726326c";
