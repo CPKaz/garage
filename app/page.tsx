@@ -167,7 +167,6 @@ export default function Home() {
     try {
       const res = await fetch(`/api/listing?id=${id}`);
       const data = await res.json();
-      console.log(data);
       setListingData(data);
     } catch (err) {
       console.error("Failed to fetch listing:", err);
